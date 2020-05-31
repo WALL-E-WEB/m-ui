@@ -1,7 +1,10 @@
 <template>
-  <div class="w-button">
+  <div class="w-button" @click="onButton">
     <div class="w-button_content" :class="[type, typeClass]">
-      <span>{{text}}</span>
+      <span> 
+        <i v-if="loading" class="iconfont icon-Loading" ></i>
+          {{text}}
+        </span>
     </div>
   </div>
 </template>
@@ -22,7 +25,24 @@ export default {
     text: String,
     plain: Boolean,
     hairline: Boolean,
-    bor: Boolean,
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    loading:{
+        type:Boolean,
+        default:false
+    },
+    square:Boolean,
+    round:Boolean
+  },
+  methods: {
+    onButton() {
+      if (this.disabled) {
+        return;
+      }
+      this.$emit("onBtn");
+    }
   },
   computed: {
     typeClass() {
@@ -30,7 +50,9 @@ export default {
       return {
         plain: this.plain,
         hairline: this.hairline,
-        bor:this.bor
+        disabled: this.disabled,
+        square:this.square,
+        round:this.round,
       };
     }
   }
@@ -76,9 +98,6 @@ export default {
       background-color: #ee0a24;
       color: #fff;
     }
-    &:active {
-      opacity: 0.8;
-    }
     &.plain {
       background-color: #fff;
       color: #000;
@@ -100,13 +119,24 @@ export default {
             transform: scale(0.5);
           }
         }
-
       }
       &.primary {
         border: 1px solid #07c160;
         color: #07c160;
         &.hairline {
+          position: relative;
           border: none;
+          &::after {
+            content: "";
+            position: absolute;
+            box-sizing: border-box;
+            right: -50%;
+            bottom: -50%;
+            left: -50%;
+            top: -50%;
+            border: 1px solid #07c160;
+            transform: scale(0.5);
+          }
         }
       }
       &.info {
@@ -121,6 +151,19 @@ export default {
         border: 1px solid #ee0a24;
         color: #ee0a24;
       }
+    }
+    // 
+    &:active {
+      opacity: 0.8;
+    }
+    &.disabled{
+        opacity: 0.4;
+    }
+    &.square{
+        border-radius: 0;
+    }
+    &.round{
+        border-radius: 44px;
     }
   }
 }
