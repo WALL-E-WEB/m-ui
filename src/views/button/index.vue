@@ -37,6 +37,13 @@
       <w-button class="curbtn" plain square  hairline type="primary" text="方形按钮" />
       <w-button class="curbtn" @onBtn="onbtnEvent" round   type="primary" text="圆形按钮" />
     </div>
+    <div class="button_title">按钮大小</div>
+    <div class="button_row">
+      <w-button class="curbtn" plain   hairline size="large" type="primary" text="大按钮" />
+      <w-button class="curbtn"    type="primary" text="大按钮" />
+      <w-button class="curbtn"  size="small"  type="primary" text="大按钮" />
+      <w-button class="curbtn"  size="mini"  type="primary" text="大按钮" />
+    </div>
   </div>
   
 </template>
@@ -72,6 +79,7 @@ export default {
     margin:10px 0;
     .curbtn{
         margin-top: 10px;
+        margin-right: 10px;
     }
   }
 }

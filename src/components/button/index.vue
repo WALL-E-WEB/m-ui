@@ -1,10 +1,10 @@
 <template>
-  <div class="w-button" @click="onButton">
+  <div class="w-button" :class="[size]" @click="onButton">
     <div class="w-button_content" :class="[type, typeClass]">
-      <span> 
-        <i v-if="loading" class="iconfont icon-Loading" ></i>
-          {{text}}
-        </span>
+      <span>
+        <i v-if="loading" class="iconfont icon-Loading"></i>
+        {{text}}
+      </span>
     </div>
   </div>
 </template>
@@ -29,12 +29,19 @@ export default {
       type: Boolean,
       default: false
     },
-    loading:{
-        type:Boolean,
-        default:false
+    loading: {
+      type: Boolean,
+      default: false
     },
-    square:Boolean,
-    round:Boolean
+    square: Boolean,
+    round: Boolean,
+    size: {
+      type: String,
+      default: "",
+      validator: function(value) {
+        return ["", "large", "small", "mini"].indexOf(value) !== -1;
+      }
+    }
   },
   methods: {
     onButton() {
@@ -51,8 +58,8 @@ export default {
         plain: this.plain,
         hairline: this.hairline,
         disabled: this.disabled,
-        square:this.square,
-        round:this.round,
+        square: this.square,
+        round: this.round
       };
     }
   }
@@ -70,7 +77,23 @@ export default {
   text-align: center;
   line-height: 1.2;
   -webkit-appearance: none;
-  margin-right: 10px;
+  &.large {
+    height: 48px;
+    width: 100%;
+  }
+  &.small {
+    height: 30px;
+    .w-button_content {
+      padding: 0 8px;
+    }
+  }
+  &.mini {
+    height: 20px;
+    .w-button_content {
+      padding: 2px 2px;
+      font-size: 12px;
+    }
+  }
   .w-button_content {
     display: flex;
     justify-content: center;
@@ -152,18 +175,18 @@ export default {
         color: #ee0a24;
       }
     }
-    // 
+    //
     &:active {
       opacity: 0.8;
     }
-    &.disabled{
-        opacity: 0.4;
+    &.disabled {
+      opacity: 0.4;
     }
-    &.square{
-        border-radius: 0;
+    &.square {
+      border-radius: 0;
     }
-    &.round{
-        border-radius: 44px;
+    &.round {
+      border-radius: 44px;
     }
   }
 }
