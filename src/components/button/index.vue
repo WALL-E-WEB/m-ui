@@ -1,5 +1,5 @@
 <template>
-  <div class="w-button" :class="[size]" @click="onButton">
+  <div class="w-button w-button--ab" :class="[size]" @click="onButton">
     <div class="w-button_content" :class="[type, typeClass]">
       <span>
         <i v-if="loading" class="iconfont icon-Loading"></i>
@@ -189,5 +189,6 @@ export default {
       border-radius: 44px;
     }
   }
+
 }
 </style>

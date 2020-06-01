@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/home/index'
 import Button from '../views/button/index'
+import Row from '../views/row/index'
 
 Vue.use(VueRouter)
 
@@ -15,6 +16,11 @@ Vue.use(VueRouter)
     path: '/button',
     name: 'Button',
     component: Button
+  },
+  {
+    path: '/row',
+    name: 'Row',
+    component: Row
   },
   // {
   //   path: '/about',

@@ -14,7 +14,8 @@ export default {
     data(){
         return{
             navList:[
-                {name:'button',path:'/button'}
+                {name:'button',path:'/button'},
+                {name:'row',path:'/row'},
             ]
         }
     }
