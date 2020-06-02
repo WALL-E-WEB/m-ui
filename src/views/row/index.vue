@@ -1,25 +1,31 @@
 <template>
-  <div class="row" >
-      <Row type="flex">
-          <w-col>ss </w-col>
-      </Row>
+  <div class="row">
+    <Row type="flex" gutter="10">
+      <w-col class="col" span="6"></w-col>
+      <w-col class="col" span="6"> </w-col>
+      <w-col class="col" span="6"> </w-col>
+      <w-col class="col" span="6"> </w-col>
+    </Row>
   </div>
 </template>
 
 <script>
-import Row from '../../components/row'
-import WCol from '../../components/col'
+import Row from '../../components/row';
+import WCol from '../../components/col';
 
 export default {
-    components:{
-        Row,
-        WCol
-    },
-    
-   
-}
+  components: {
+    Row,
+    WCol
+  }
+};
 </script>
 
 <style lang="less">
-
+.col {
+  //   background-color: skyblue;
+  > div {
+    background-color: skyblue;
+  }
+}
 </style>
