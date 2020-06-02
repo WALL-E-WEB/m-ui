@@ -10,39 +10,33 @@ export default {
     type: String,
     justify: {
       type: String,
-      default: 'center'
+      default: "center"
     },
     align: {
       type: String,
-      default: 'center'
+      default: "center"
     },
     gutter: {
       type: [String, Number],
       default: 0
     }
   },
-  methods: {},
-  computed: {
-    RowClass() {
-      let flex = this.type === 'flex';
-      return [
-        {
-          'w-row--flex': flex,
-          [`justify-${this.justify}`]: flex && this.justify,
-          [`align-${this.align}`]: flex && this.align
-        }
-      ];
-    },
-    spaces() {
+  methods: {
+      spaces2() {
+      const gutter = Number(this.gutter);
+
+      if (!gutter) {
+        return;
+      }
+
       const spaces = [];
       const groups = [[]];
 
-      let gutter = Number(this.gutter);
-      if (!gutter) return;
       let total = 0;
-
+        console.log(this.$children)
       this.$children.forEach((item, index) => {
         total += Number(item.$attrs.span);
+        console.log("total", total);
 
         if (total > 24) {
           groups.push([index]);
@@ -51,8 +45,8 @@ export default {
           groups[groups.length - 1].push(index);
         }
       });
-
-      groups.forEach((group) => {
+      console.log("groups11", groups);
+      groups.forEach(group => {
         const averagePadding = (gutter * (group.length - 1)) / group.length;
 
         group.forEach((item, index) => {
@@ -65,10 +59,70 @@ export default {
           }
         });
       });
+      console.log("spaces", spaces);
       return spaces;
     }
   },
-  mounted() {}
+  computed: {
+    RowClass() {
+      let flex = this.type === "flex";
+      return [
+        {
+          "w-row--flex": flex,
+          [`justify-${this.justify}`]: flex && this.justify,
+          [`align-${this.align}`]: flex && this.align
+        }
+      ];
+    },
+    spaces() {
+      const gutter = Number(this.gutter);
+
+      if (!gutter) {
+        return;
+      }
+
+      const spaces = [];
+      const groups = [[]];
+
+      let total = 0;
+        console.log(this.$children)
+      this.$children.forEach((item, index) => {
+        total += Number(item.$attrs.span);
+        console.log("total", total);
+
+        if (total > 24) {
+          groups.push([index]);
+          total -= 24;
+        } else {
+          groups[groups.length - 1].push(index);
+        }
+      });
+      console.log("groups11", groups);
+      groups.forEach(group => {
+        const averagePadding = (gutter * (group.length - 1)) / group.length;
+
+        group.forEach((item, index) => {
+          if (index === 0) {
+            spaces.push({ right: averagePadding });
+          } else {
+            const left = gutter - spaces[item - 1].right;
+            const right = averagePadding - left;
+            spaces.push({ left, right });
+          }
+        });
+      });
+      console.log("spaces", spaces);
+      return spaces;
+    }
+  },
+  mounted() {
+    //   this.$children.forEach(item=>{
+    //       console.log(item)
+    //   })
+    // console.log(this.$children);
+    console.log('spaces2',this.spaces2());
+    
+  }
 };
 </script>
 

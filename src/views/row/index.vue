@@ -1,10 +1,10 @@
 <template>
   <div class="row">
     <Row type="flex" gutter="10">
-      <w-col class="col" span="6"></w-col>
-      <w-col class="col" span="6"> </w-col>
-      <w-col class="col" span="6"> </w-col>
-      <w-col class="col" span="6"> </w-col>
+      <w-col class="col" span="6"> <div>2</div></w-col>
+      <w-col class="col" span="6"> <div>2</div></w-col>
+      <w-col class="col" span="6"> <div>2</div></w-col>
+      <w-col class="col" span="6"> <div>2</div></w-col>
     </Row>
   </div>
 </template>
@@ -23,7 +23,7 @@ export default {
 
 <style lang="less">
 .col {
-  //   background-color: skyblue;
+//   background-color: skyblue;
   > div {
     background-color: skyblue;
   }

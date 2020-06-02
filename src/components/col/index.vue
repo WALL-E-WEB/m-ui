@@ -11,16 +11,30 @@ export default {
       this.$parent;
     }
   },
+  data(){
+      return {
+          keyindex:0
+      }
+  },
   mounted() {
-    console.log(this.$parent.spaces);
+    // console.log(this.$parent.spaces);
     // let { index } = this;
     // console.log(this);
-    console.log(this.$parent.$children.indexOf(this));
+    // console.log('parent',this.$parent);
+    // console.log('children',this.$parent.$children);
+    // this.keyindex = this.$parent.$children.indexOf(this);
+    //  const children = [...this.$parent.$children, this];
+    //  console.log('children',children)
   },
   computed: {
     style() {
       let index = this.$parent.$children.indexOf(this);
-      let space = this.$parent.spaces;
+    
+    //   let index = this.keyindex
+        console.log('index',index);
+      let space = this.$parent.spaces2();
+      console.log('childre space',space);
+      
       if (space && space[index]) {
         let { left, right } = space[index];
         return {
