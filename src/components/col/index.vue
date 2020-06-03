@@ -1,40 +1,33 @@
 <template>
-  <div class="w-col" :style="style">
+  <div class="w-col" :class="spanClass" :style="style">
     <slot></slot>
   </div>
 </template>
 
 <script>
 export default {
-  computed: {
-    padding() {
-      this.$parent;
+  props: {
+    span: {
+      type: [Number, String],
+      default: 0
+    },
+    offset: {
+      type: [Number, String],
+      default: 0
     }
   },
-  data(){
-      return {
-          keyindex:0
-      }
+  data() {
+    return {
+      keyindex: 0
+    };
   },
-  mounted() {
-    // console.log(this.$parent.spaces);
-    // let { index } = this;
-    // console.log(this);
-    // console.log('parent',this.$parent);
-    // console.log('children',this.$parent.$children);
-    // this.keyindex = this.$parent.$children.indexOf(this);
-    //  const children = [...this.$parent.$children, this];
-    //  console.log('children',children)
-  },
+  mounted() {},
   computed: {
     style() {
       let index = this.$parent.$children.indexOf(this);
-    
-    //   let index = this.keyindex
-        console.log('index',index);
-      let space = this.$parent.spaces2();
-      console.log('childre space',space);
-      
+
+      let space = this.$parent.spaces();
+
       if (space && space[index]) {
         let { left, right } = space[index];
         return {
@@ -42,6 +35,11 @@ export default {
           paddingRight: right ? right + 'px' : null
         };
       }
+    },
+    spanClass() {
+      let span = Number(this.span);
+      let offset = Number(this.offset);
+      return [`w-col-span-${span}`, `w-col-offset-${offset}`];
     }
   }
 };
@@ -49,7 +47,19 @@ export default {
 
 <style lang="less">
 .w-col {
+  float: left;
   box-sizing: border-box;
-  width: 100%;
+  // width: 100%;
+}
+.w-col2(24); //执行
+.w-col2(@n, @i: 1) when (@i =< @n) {
+  //声明 if
+  &.w-col-span-@{i} {
+    width: @i / 24 * 100%;
+  }
+  &.w-col-offset-@{i} {
+    margin-left: @i / 24 * 100%;
+  }
+  .w-col2(@n, (@i + 1)); //执行 递归
 }
 </style>
