@@ -25,8 +25,8 @@ export default {
   computed: {
     style() {
       let index = this.$parent.$children.indexOf(this);
-
-      let space = this.$parent.spaces();
+      // let space = this.$parent.space(); //当space为methods 和 computed 不能正常获取 注:子父渲染顺序
+      let space = this.$parent.spacesObj;
 
       if (space && space[index]) {
         let { left, right } = space[index];

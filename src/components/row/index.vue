@@ -21,6 +21,11 @@ export default {
       default: 0
     }
   },
+  data() {
+    return {
+      spacesObj: ''
+    };
+  },
   methods: {
     spaces() {
       const gutter = Number(this.gutter);
@@ -58,6 +63,7 @@ export default {
           }
         });
       });
+      console.log('spaces', spaces);
 
       return spaces;
     }
@@ -76,7 +82,9 @@ export default {
       ];
     }
   },
-  mounted() {}
+  mounted() {
+    this.spacesObj = this.spaces();
+  }
 };
 </script>
 

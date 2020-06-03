@@ -75,6 +75,7 @@ export default {
 }
 .row {
   color: #fff;
+  padding: 15px;
   .row_item {
     .col {
       &:nth-child(2n) {
