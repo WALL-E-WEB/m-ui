@@ -4,6 +4,7 @@ import Home from '../views/home/index';
 import Button from '../views/button/index';
 import Row from '../views/row/index';
 import Popup from '../views/popup/index';
+import List from '../views/list/index';
 
 Vue.use(VueRouter);
 
@@ -27,7 +28,12 @@ const routes = [
     path: '/popup',
     name: 'Popup',
     component: Popup
-  }
+  },
+  {
+    path: '/list',
+    name: 'List',
+    component: List
+  },
   // {
   //   path: '/about',
   //   name: 'About',
