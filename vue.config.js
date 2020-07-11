@@ -32,7 +32,20 @@
 //   }
 // };
 module.exports = {
-    configureWebpack: {
-      devtool: 'source-map'
+  configureWebpack: {
+    devtool: 'source-map'
+  },
+  devServer: {
+    proxy: {
+      '/api': {
+        target: 'http://127.0.0.1:3001',
+        ws: true, //是否代理websockets
+        changeOrigin: true,
+        pathRewrite: {
+          //重写路径 比如'/api/aaa/ccc'重写为'/aaa/ccc'
+          '^/api': ''
+        }
+      }
     }
   }
+};

@@ -1,12 +1,13 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '../views/home/index'
-import Button from '../views/button/index'
-import Row from '../views/row/index'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import Home from '../views/home/index';
+import Button from '../views/button/index';
+import Row from '../views/row/index';
+import Popup from '../views/popup/index';
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
-  const routes = [
+const routes = [
   {
     path: '/',
     name: 'Home',
@@ -22,6 +23,11 @@ Vue.use(VueRouter)
     name: 'Row',
     component: Row
   },
+  {
+    path: '/popup',
+    name: 'Popup',
+    component: Popup
+  }
   // {
   //   path: '/about',
   //   name: 'About',
@@ -30,10 +36,10 @@ Vue.use(VueRouter)
   //   // which is lazy-loaded when the route is visited.
   //   component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   // }
-]
+];
 
 const router = new VueRouter({
   routes
-})
+});
 
-export default router
+export default router;
