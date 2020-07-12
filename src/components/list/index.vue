@@ -5,24 +5,29 @@
        @touchmove="onTouchMv"
        @touchend="onTouchEn"
        @scroll="listenerScroll">
-       <div class="top" ref="top">刷新</div>
+       <div class="top" ref="top">{{topText}}</div>
     <main ref="itemwrap" class="w_list_main">
-      <!-- <section class="w_list_top" v-if="true">top</section> -->
       <!-- <slot></slot> -->
-      <div class="w_list_item"
-      @click="btn"
-           v-for="(item, index) in mockData"
-           :key="index">
-        {{item}}
+      <div class="w_list_item" v-for="item in mockData" :key="item">
+          {{item}}
       </div>
-      <section v-if="showload">加载中...</section>
+      <section v-if="showload">{{loadText}}</section>
     </main>
   </div>
 </template>
 
 <script>
 export default {
-  props: {},
+  props: {
+      topText:{
+          type:String,
+          default:'刷新'
+      },
+      loadText:{
+          type:String,
+          default:'加载中...'
+      }
+  },
   data() {
     return {
       listwrap: "",
@@ -30,7 +35,7 @@ export default {
       eleListheight: 0,
       itemWrapheight: 0,
       mockData: 20,
-      index: 1,
+        loadHeight:50,
       showload: false,
       startY:0,
       mv:'',
@@ -39,6 +44,7 @@ export default {
   },
   methods: {
     listenerScroll(e) {
+        console.log(this.$refs.itemwrap.getBoundingClientRect());
       if (this.showload) return;
       this.eleListTop = this.listwrap.scrollTop;
       this.itemWrapheight = this.$refs.itemwrap.scrollHeight;
@@ -59,14 +65,13 @@ export default {
         // this.$refs.elelist.style.transform = `translate(0,${})`
     },
     onTouchMv(e){
-          if(this.eleListTop > 50) return ;
+          if(this.eleListTop > this.loadHeight) return ;
            
             let temp = e.targetTouches[0].pageY;
             this.mv =temp -  this.startY;
               console.log(this.mv);
-            if(this.mv>0 && this.mv<50){
+            if(this.mv>0 && this.mv<this.loadHeight){
                 this.showTop = true
-                //  this.$refs.elelist.scrollTop = -this.mv;
                 this.$refs.itemwrap.style.transform = `translate(0,${this.mv}px)`;
                 this.$refs.top.style.transform = `translate(0,${this.mv-50}px)`;
             }
@@ -83,11 +88,8 @@ export default {
     this.listwrap = this.$refs.elelist;
     this.eleListTop = this.listwrap.scrollTop;
     this.eleListheight = this.listwrap.offsetHeight;
-
     this.itemWrapheight = this.$refs.itemwrap.scrollHeight;
-
-    console.log("eleListheight", this.eleListheight);
-    console.log("itemWrapheight", this.itemWrapheight);
+    console.log(this.listwrap.getBoundingClientRect());
   }
 };
 </script>
@@ -97,7 +99,7 @@ export default {
    
   height: 100vh;
   overflow: auto;
-  transition: all .6s  ;
+  
   .top{
       width: 100%;
       position: absolute;
@@ -108,17 +110,19 @@ export default {
   }
   .w_list_top{
       height: 40px;
-      background-color: red;
+      background-color: rgb(224, 224, 224);
     //   transform: translate(0,-40px);
   }
   .w_list_main{
+      transition: all .6s  ;
       position: relative;
       z-index: 2;
       background-color: #fff;
   }
   .w_list_item {
     height: 40px;
-    border: 1px solid #ccc;
+    border-top: .5px solid rgb(240, 240, 240);
+    line-height: 40px;
     
   }
 }

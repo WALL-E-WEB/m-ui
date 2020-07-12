@@ -15,7 +15,8 @@ export default {
       navList: [
         { name: 'button', path: '/button' },
         { name: 'row', path: '/row' },
-        { name: 'popup', path: '/popup' }
+        { name: 'popup', path: '/popup' },
+        { name: 'list', path: '/list' }
       ]
     };
   }
